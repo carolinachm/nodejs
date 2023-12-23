@@ -5,36 +5,14 @@ const { engine } = require('express-handlebars');
 //importar modulo de upload
 const fileupload = require('express-fileupload')
 
-const { Pool } = require('pg');
-
-// Configuração do pool de conexões
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'produto',
-  password: 'postgres',
-  port: 5432, // porta padrão do PostgreSQL
-});
-
-// Testando a conexão
-pool.query('SELECT NOW()', (err, res) => {
-  if (err) {
-    console.error('Erro na conexão com o PostgreSQL', err);
-  } else {
-    console.log('Conexão bem-sucedida! Hora atual do PostgreSQL:', res.rows[0].now);
-  }
-  // Encerra a pool de conexões (opcional, dependendo do seu caso de uso)
-  pool.end();
-});
-
-
+const Pool = require('./db/configDB')
 
 //App
 const app = express()
 
 //Manipulação de dados via rotas
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }))
 
 
 //habilitando o upload de arquivos
@@ -73,7 +51,7 @@ app.post('/cadastrar', (req, res) => {
     let sql = `INSERT INTO produtos(nome, descricao, valor, imagem) VALUES ('${nome}', '${descricao}', ${valor}, '${imagem}')`
 
     //executar o sql
-    pool.query(sql, function(erro, retorno) {
+    pool.query(sql, function (erro, retorno) {
         if (erro) throw erro
         //caso ocorra o cadastro
         req.files.imagem.mv(__dirname + '/imagens/' + req.files.imagem.name)
