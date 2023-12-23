@@ -38,6 +38,7 @@ app.use('imagens',express.static('./imagens'))
 // app.get('/', (req, res) => {
 //     res.render('formulario')
 // })
+
 //rota para retornar todos os produtos
 app.get('/', (req, res) => {
     //SQL
@@ -56,11 +57,11 @@ app.post('/cadastrar', (req, res) => {
     let imagem = req.files.imagem.name;
 
     //SQL
-    let sql = `INSERT INTO produtos(nome, descricao, valor, imagem) VALUES ('${nome}', '${descricao}', ${valor}, '${imagem}')`
+    let sql = `INSERT INTO produtos(nome, descricao, valor, imagem) VALUES ('${nome}', '${descricao}', ${valor}, '${imagem}')`;
 
     //executar o sql
     pool.query(sql, function (erro, retorno) {
-        if (erro) throw erro
+        if (erro) throw erro;
         //caso ocorra o cadastro
         req.files.imagem.mv(__dirname + '/imagens/' + req.files.imagem.name)
         console.log(retorno)
@@ -69,6 +70,12 @@ app.post('/cadastrar', (req, res) => {
 
 
 
+})
+//rota para remover produtos
+app.get('/remover/:codigo&:imagem', (req, res)=>{
+    console.log(req.params.codigo)
+    console.log(req.params.imagem)
+    res.end()
 })
 
 //Servidor

@@ -1,7 +1,7 @@
 <main>
   {{!-- Botão para abrir o modal --}}
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modelProduto">Novo
-    Cadastro</button>
+    Produto</button>
 
 
   <!-- A Modal -->
@@ -11,7 +11,7 @@
 
         <!-- Cabeçalho da Modal -->
         <div class="modal-header">
-          <h4 class="modal-title">Confirmação de Cadastro</h4>
+          <h4 class="modal-title">Cadastrar Produto</h4>
           <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
         </div>
 
@@ -50,23 +50,25 @@
       </div>
     </div>
   </div>
-  {{!--Listagem de produtos --}}
-  <div class="container">
-    <div class="row">
-      {{#each produtos}}
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+  <!-- Listagem de produtos -->
+<div class="container" mt-4>
+  <h2>Lista de Produtos</h2>
+  <div class="row">
+    {{#each produtos}}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <div class="card">
           <img src="../imagens/{{imagem}}">
           <div class="textos">
-              <p>{{nome}}</p>
-              <p>{{descricao}}</p>
-              <p>R${{valor}}</p>
+            <p>{{nome}}</p>
+            <p>{{descricao}}</p>
+            <p>R${{valor}}</p>
           </div>
-          <a class="btn btn-warning" href="#">Alterar</a>
-          <a class="btn btn-danger" href="#">Remover</a>
+          <a class="btn btn-warning btn-sm float-right ml-2" href="#">Alterar</a>
+          <a href="/remover/{{codigo}}&{{imagem}}" class="btn btn-danger btn-sm float-right">Remover</a>
         </div>
-      {{/each}}
-    </div>
+      </div>
+    {{/each}}
   </div>
-  </div>
+</div>
+
 </main>
