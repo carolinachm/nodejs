@@ -1,26 +1,7 @@
 <main>
-    {{!-- Formulario --}}
-    <div class="container">
-        <div class="row">
-            <div class="col-6 offset-3">
-                <form action="/cadastrar" method="post" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Nome do produto">
-                    </div>                                
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Descrição do produto">
-                    </div>
-                    <div class="mb-3">
-                        <input type="number" class="form-control" placeholder="Valor do produto">
-                    </div>
-                    <div class="mb-3"> 
-                        <input type="file" class="form-control">
-                    </div>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelProduto">Novo Cadastro</button>
-                </form>
-            </div>
-        </div>
-    </div>
+  {{!-- Botão para abrir o modal --}}
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modelProduto">Novo Cadastro</button>
+    
 
     <!-- A Modal -->
     <div class="modal" id="modelProduto">
@@ -30,12 +11,33 @@
           <!-- Cabeçalho da Modal -->
           <div class="modal-header">
             <h4 class="modal-title">Confirmação de Cadastro</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
           </div>
 
           <!-- Corpo da Modal -->
           <div class="modal-body">
-            <p>Produto cadastrado com sucesso!</p>
+            {{!-- Formulario --}}
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <form action="/cadastrar" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <input type="text" name="nome" class="form-control" placeholder="Nome do produto">
+                            </div>                                
+                            <div class="mb-3">
+                                <input type="text" name="descricao" class="form-control" placeholder="Descrição do produto">
+                            </div>
+                            <div class="mb-3">
+                                <input type="number" name="valor" class="form-control" placeholder="Valor do produto">
+                            </div>
+                            <div class="mb-3"> 
+                                <input type="file" name="imagem" class="form-control">
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Cadastrar">
+                        </form>
+                    </div>
+                </div>
+            </div>
           </div>
 
           <!-- Rodapé da Modal -->
