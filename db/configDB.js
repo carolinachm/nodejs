@@ -4,7 +4,7 @@ const { Pool } = require('pg');
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
-    database: 'produto',
+    database: 'projeto',
     password: 'postgres',
     port: 5432, // porta padrão do PostgreSQL
 });
@@ -17,7 +17,7 @@ pool.query('SELECT NOW()', (err, res) => {
         console.log('Conexão bem-sucedida! Hora atual do PostgreSQL:', res.rows[0].now);
     }
     // Encerra a pool de conexões (opcional, dependendo do seu caso de uso)
-    pool.end();
+    //  pool.end();
 });
 
 module.exports = {

@@ -1,52 +1,72 @@
 <main>
   {{!-- Botão para abrir o modal --}}
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modelProduto">Novo Cadastro</button>
-    
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modelProduto">Novo
+    Cadastro</button>
 
-    <!-- A Modal -->
-    <div class="modal" id="modelProduto">
-      <div class="modal-dialog">
-        <div class="modal-content">
 
-          <!-- Cabeçalho da Modal -->
-          <div class="modal-header">
-            <h4 class="modal-title">Confirmação de Cadastro</h4>
-            <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-          </div>
+  <!-- A Modal -->
+  <div class="modal" id="modelProduto">
+    <div class="modal-dialog">
+      <div class="modal-content">
 
-          <!-- Corpo da Modal -->
-          <div class="modal-body">
-            {{!-- Formulario --}}
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <form action="/cadastrar" method="post" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <input type="text" name="nome" class="form-control" placeholder="Nome do produto">
-                            </div>                                
-                            <div class="mb-3">
-                                <input type="text" name="descricao" class="form-control" placeholder="Descrição do produto">
-                            </div>
-                            <div class="mb-3">
-                                <input type="number" name="valor" class="form-control" placeholder="Valor do produto">
-                            </div>
-                            <div class="mb-3"> 
-                                <input type="file" name="imagem" class="form-control">
-                            </div>
-                            <input type="submit" class="btn btn-primary" value="Cadastrar">
-                        </form>
-                    </div>
-                </div>
+        <!-- Cabeçalho da Modal -->
+        <div class="modal-header">
+          <h4 class="modal-title">Confirmação de Cadastro</h4>
+          <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Corpo da Modal -->
+        <div class="modal-body">
+          {{!-- Formulario --}}
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <form action="/cadastrar" method="post" enctype="multipart/form-data">
+                  <div class="mb-3">
+                    <input type="text" name="nome" class="form-control" placeholder="Nome do produto">
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" name="descricao" class="form-control" placeholder="Descrição do produto">
+                  </div>
+                  <div class="mb-3">
+                    <input type="number" name="valor" class="form-control" placeholder="Valor do produto">
+                  </div>
+                  <div class="mb-3">
+                    <input type="file" name="imagem" class="form-control">
+                  </div>
+                  <input type="submit" class="btn btn-primary" value="Cadastrar">
+                </form>
+              </div>
             </div>
           </div>
-
-          <!-- Rodapé da Modal -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            <!-- Adicione outros botões ou ações conforme necessário -->
-          </div>
-
         </div>
+
+        <!-- Rodapé da Modal -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <!-- Adicione outros botões ou ações conforme necessário -->
+        </div>
+
       </div>
     </div>
+  </div>
+  {{!--Listagem de produtos --}}
+  <div class="container">
+    <div class="row">
+      {{#each produtos}}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="card">
+          <img src="../imagens/{{imagem}}">
+          <div class="textos">
+              <p>{{nome}}</p>
+              <p>{{descricao}}</p>
+              <p>R${{valor}}</p>
+          </div>
+          <a class="btn btn-warning" href="#">Alterar</a>
+          <a class="btn btn-danger" href="#">Remover</a>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+  </div>
 </main>

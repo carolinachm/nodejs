@@ -5,7 +5,7 @@ const { engine } = require('express-handlebars');
 //importar modulo de upload
 const fileupload = require('express-fileupload')
 
-const Pool = require('./db/configDB')
+const pool = require('./db/configDB').pool
 
 //App
 const app = express()
@@ -24,8 +24,6 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 
-
-
 const PORT = 3000;
 
 
@@ -34,10 +32,20 @@ app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'))
 
 //adicionar css
 app.use('/css', express.static('./css'))
-
+//referenciar a pasta de imagem
+app.use('imagens',express.static('./imagens'))
 //rota principal
+// app.get('/', (req, res) => {
+//     res.render('formulario')
+// })
+//rota para retornar todos os produtos
 app.get('/', (req, res) => {
-    res.render('formulario')
+    //SQL
+    let sql = (`SELECT * FROM produtos`)
+    //executar o sql
+    pool.query(sql, function (erro, retorno) {
+        res.render('formulario', {produtos: retorno})
+    });
 })
 //rota de cadastro
 app.post('/cadastrar', (req, res) => {
