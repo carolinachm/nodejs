@@ -80,7 +80,6 @@ app.post('/cadastrar', (req, res) => {
 app.get('/remover/:codigo&:imagem', (req, res) => {
     // Sql
     let sql = `DELETE FROM produtos WHERE codigo = ${req.params.codigo}`
-
     //Executando sql
     pool.query(sql, function (erro, retorno) {
         //Caso false o comando sql
@@ -88,14 +87,14 @@ app.get('/remover/:codigo&:imagem', (req, res) => {
         //Caso o comando sql funcione
         fs.unlink(__dirname + '/imagens/' + req.params.imagem, (erro_imagem) => {
             console.log('Falha ao remover a imagem')
-         
+        })
     })
-    //Redirecionamento
-    res.redirect('/')
+        //Redirecionamento
+        res.redirect('/')
 })
 
 //rota para editar produto
-app.get('/formularioEditar/:codigo', function(req, res){
+app.get('/formularioEditar/:codigo', function (req, res) {
     console.log(req.params.codigo)
     res.end()
 })
