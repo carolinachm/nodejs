@@ -6,6 +6,13 @@ form{
 form input{
     margin-top: 10px;
 }
+form input[type="submit"]{
+    margin-top:10px;
+}
+form img{
+    width: 200px;
+    margin-bottom: 40px;
+}
 .card{
     margin-top: 40px;
     padding: 5px;
@@ -16,6 +23,7 @@ form input{
     margin-top: 30px;
     font-weight: bold;
 }
+
 .card a{
     margin-top: 5px;
 }

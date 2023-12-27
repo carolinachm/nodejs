@@ -29,13 +29,13 @@ app.set('views', './views');
 // Rota principal
 app.get('/', function(req, res){
     // Vetor
-    let vetor = [
-        {'codigo':1, 'nome':''},
+    let produtos = [
+        {'codigo':12, 'nome':''},
         
     ];
 
     // Render
-    res.render('pagina', {vetor:vetor});
+    res.render('formularioEditar', {produtos:produtos});
 });
 
 
@@ -107,11 +107,40 @@ app.get('/remover/:codigo&:imagem', (req, res) => {
 
 //rota para editar produto
 app.get('/formularioEditar/:codigo', function (req, res) {
-    res.render('formularioEditar')
+    //SQL
+    let sql = `SELECT * FROM produtos WHERE codigo = ${req.params.codigo}`;
+
+    //Executar o sql
+    pool.query(sql, function(erro, retorno){
+        //caso aja erro
+        if(erro) throw erro
+        //Caso de certo
+        res.render('formularioEditar', {produto: retorno[0]})
+    })
+})
+//rota para editar produto
+app.post('/editar', function(req, res){
+    //obter os dados do formulario
+    let codigo = req.body.codigo;
+    let nome =req.body.nome;
+    let descricao = req.body.descricao;
+    let valor = req.body.valor;
+    let imagem = req.files.imagem.nome
+    let nomeImagem = req.body.nomeImagem;
+
+    //Exibir os dados
+    console.log(codigo)
+    console.log(nome)
+    console.log(descricao)
+    console.log(valor)
+    console.log(imagem)
+    console.log(nomeImagem)
+    //finaliza a rota
+    res.end()
 })
 
 // Verifica se existe alguma porta na variaveis de ambiente, caso contrario, utiliza a porta padrão
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
-    console.log('Server online')
+    console.log('Servidor rodando')
 })
