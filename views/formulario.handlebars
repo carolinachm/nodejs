@@ -63,41 +63,13 @@
             <p>{{descricao}}</p>
             <p>R${{valor}}</p>
           </div>
-          <a href="/formularioEditar/{{codigo}}" class="btn btn-warning btn-sm float-right ml-2" data-toggle="modal" data-target="#edicaoModal">Alterar</a>
+          <a href="/formularioEditar/{{codigo}}" class="btn btn-warning btn-sm float-right ml-2" >Alterar</a>
           <a href="/remover/{{codigo}}&{{imagem}}" class="btn btn-danger btn-sm float-right">Remover</a>
         </div>
       </div>
     {{/each}}
   </div>
 </div>
-<!-- Modal de Edição -->
-  <div class="modal fade" id="edicaoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-                 {{!-- Formulario --}}
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <form action="/formularioEditar/{{codigo}}" method="post" enctype="multipart/form-data">
-                  <div class="mb-3">
-                    <input type="text" name="nome" class="form-control" placeholder="Nome do produto">
-                  </div>
-                  <div class="mb-3">
-                    <input type="text" name="descricao" class="form-control" placeholder="Descrição do produto">
-                  </div>
-                  <div class="mb-3">
-                    <input type="number" name="valor" class="form-control" placeholder="Valor do produto">
-                  </div>
-                  <div class="mb-3">
-                    <input type="file" name="imagem" class="form-control">
-                  </div>
-                  <input type="submit" class="btn btn-primary" value="Cadastrar">
-                </form>
-              </div>
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
+
 
 </main>

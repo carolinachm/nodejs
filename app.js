@@ -26,6 +26,18 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
+// Rota principal
+app.get('/', function(req, res){
+    // Vetor
+    let vetor = [
+        {'codigo':1, 'nome':''},
+        
+    ];
+
+    // Render
+    res.render('pagina', {vetor:vetor});
+});
+
 
 //adicionar bootstrap
 app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'))
@@ -95,8 +107,7 @@ app.get('/remover/:codigo&:imagem', (req, res) => {
 
 //rota para editar produto
 app.get('/formularioEditar/:codigo', function (req, res) {
-    console.log(req.params.codigo)
-    res.end()
+    res.render('formularioEditar')
 })
 
 // Verifica se existe alguma porta na variaveis de ambiente, caso contrario, utiliza a porta padrão
