@@ -5,6 +5,9 @@ const { engine } = require('express-handlebars');
 //importar modulo de upload
 const fileupload = require('express-fileupload')
 
+//file-system(manipular arquivos)
+const fs = require('fs');
+
 const pool = require('./db/configDB').pool
 
 //App
@@ -24,28 +27,30 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 
-const PORT = 3000;
-
-
 //adicionar bootstrap
 app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'))
 
 //adicionar css
-app.use('/css', express.static('./css'))
+app.use('/public', express.static('./public/css'))
 //referenciar a pasta de imagem
-app.use('imagens',express.static('./imagens'))
-//rota principal
+app.use('/imagens', express.static('./imagens'))
+
+
+//Rota principal
+// app.get('/', (req, res) => {
+//     // envia o arquivo da página principal
+//     res.sendFile(__dirname + '/views/formulario')
+// })
 // app.get('/', (req, res) => {
 //     res.render('formulario')
 // })
-
 //rota para retornar todos os produtos
 app.get('/', (req, res) => {
     //SQL
     let sql = (`SELECT * FROM produtos`)
     //executar o sql
     pool.query(sql, function (erro, retorno) {
-        res.render('formulario', {produtos: retorno})
+        res.render('formulario', { produtos: retorno.rows })
     });
 })
 //rota de cadastro
@@ -72,13 +77,31 @@ app.post('/cadastrar', (req, res) => {
 
 })
 //rota para remover produtos
-app.get('/remover/:codigo&:imagem', (req, res)=>{
+app.get('/remover/:codigo&:imagem', (req, res) => {
+    // Sql
+    let sql = `DELETE FROM produtos WHERE codigo = ${req.params.codigo}`
+
+    //Executando sql
+    pool.query(sql, function (erro, retorno) {
+        //Caso false o comando sql
+        if (erro) throw erro
+        //Caso o comando sql funcione
+        fs.unlink(__dirname + '/imagens/' + req.params.imagem, (erro_imagem) => {
+            console.log('Falha ao remover a imagem')
+         
+    })
+    //Redirecionamento
+    res.redirect('/')
+})
+
+//rota para editar produto
+app.get('/formularioEditar/:codigo', function(req, res){
     console.log(req.params.codigo)
-    console.log(req.params.imagem)
     res.end()
 })
 
-//Servidor
+// Verifica se existe alguma porta na variaveis de ambiente, caso contrario, utiliza a porta padrão
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
-    console.log(`Rodando na porta http://localhost:${PORT}`);
+    console.log('Server online')
 })

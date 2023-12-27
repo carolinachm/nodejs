@@ -52,18 +52,18 @@
   </div>
   <!-- Listagem de produtos -->
 <div class="container" mt-4>
-  <h2>Lista de Produtos</h2>
+  <h2>Listar de Produtos</h2>
   <div class="row">
     {{#each produtos}}
       <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <div class="card">
-          <img src="../imagens/{{imagem}}">
+          <img src="/imagens/{{imagem}}">
           <div class="textos">
             <p>{{nome}}</p>
             <p>{{descricao}}</p>
             <p>R${{valor}}</p>
           </div>
-          <a class="btn btn-warning btn-sm float-right ml-2" href="#">Alterar</a>
+          <a href="/formularioEditar/{{codigo}}" class="btn btn-warning btn-sm float-right ml-2" >Alterar</a>
           <a href="/remover/{{codigo}}&{{imagem}}" class="btn btn-danger btn-sm float-right">Remover</a>
         </div>
       </div>

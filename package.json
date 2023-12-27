@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "Carolina Mesquita",
@@ -16,6 +16,7 @@
     "express": "^4.18.2",
     "express-fileupload": "^1.4.3",
     "express-handlebars": "^7.1.2",
+    "file-system": "^2.2.2",
     "pg": "8.2",
     "postgres": "^3.4.3"
   },

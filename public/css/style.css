@@ -1,3 +1,5 @@
+
+
 form{
     margin-top: 30px;
 }
@@ -16,5 +18,9 @@ form input{
 }
 .card a{
     margin-top: 5px;
-    
 }
+.card img {
+    width: 100%; /* a imagem ocupará 100% da largura do contêiner pai (.card) */
+    height: 150px; /* altura desejada da imagem */
+    object-fit: cover; /* para manter a proporção da imagem e cobrir o contêiner */
+  }
