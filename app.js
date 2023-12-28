@@ -27,16 +27,16 @@ app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 // Rota principal
-app.get('/', function(req, res){
-    // Vetor
-    let produtos = [
-        {'codigo':12, 'nome':''},
+// app.get('/', function(req, res){
+//     Vetor
+//     let produtos = [
+//         {'codigo':12, 'nome':''},
         
-    ];
+//     ];
 
-    // Render
-    res.render('formularioEditar', {produtos:produtos});
-});
+//     Render
+//     res.render('formularioEditar', {produtos:produtos});
+// });
 
 
 //adicionar bootstrap
@@ -48,11 +48,11 @@ app.use('/public', express.static('./public/css'))
 app.use('/imagens', express.static('./imagens'))
 
 
-//Rota principal
+// //Rota principal
 // app.get('/', (req, res) => {
 //     // envia o arquivo da página principal
 //     res.sendFile(__dirname + '/views/formulario')
-// })
+// // })
 // app.get('/', (req, res) => {
 //     res.render('formulario')
 // })
@@ -85,7 +85,8 @@ app.post('/cadastrar', (req, res) => {
         res.end()
     });
 
-
+     //Redirecionamento
+     res.redirect('/')
 
 })
 //rota para remover produtos

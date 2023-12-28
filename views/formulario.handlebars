@@ -20,21 +20,25 @@
           {{!-- Formulario --}}
           <div class="container">
             <div class="row">
-              <div class="col-12">
-                <form action="/cadastrar" method="post" enctype="multipart/form-data">
-                  <div class="mb-3">
+              <div class="col-sm-10 offset-md-1">
+                <form action="/cadastrar" method="post" enctype="multipart/form-data" autocomplete="off">
+                  <input type="hidden" name="_id" value="{{produto._id}}">
+                  <div class="form-group col-md-6">
                     <input type="text" name="nome" class="form-control" placeholder="Nome do produto">
                   </div>
-                  <div class="mb-3">
+                  <div class="form-group col-md-6">
                     <input type="text" name="descricao" class="form-control" placeholder="Descrição do produto">
                   </div>
-                  <div class="mb-3">
+                  <div class="form-group col-md-6">
                     <input type="number" name="valor" class="form-control" placeholder="Valor do produto">
                   </div>
-                  <div class="mb-3">
+                  <div class="form-group col-md-6">
                     <input type="file" name="imagem" class="form-control">
                   </div>
-                  <input type="submit" class="btn btn-primary" value="Salvar">
+                  <div class="form-group float-right">
+                     <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-database"></i> Salvar</button>
+                  </div>
+                 
                 </form>
               </div>
             </div>
@@ -63,7 +67,7 @@
             <p>{{descricao}}</p>
             <p>R${{valor}}</p>
           </div>
-          <a href="/formularioEditar/{{codigo}}" class="btn btn-warning btn-sm float-right ml-2" >Alterar</a>
+          <a href="/formularioEditar/{{codigo}}" class="btn btn-warning btn-sm float-right ml-2"> >Alterar</a>
           <a href="/remover/{{codigo}}&{{imagem}}" class="btn btn-danger btn-sm float-right">Remover</a>
         </div>
       </div>
