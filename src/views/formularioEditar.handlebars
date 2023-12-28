@@ -13,6 +13,7 @@
                     <div class="textos">
                         <p>{{nome}}</p>
                         <p>{{descricao}}</p>
+                        <p>{{categoria}}</p>
                         <p>R${{valor}}</p>
                     </div>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -56,6 +57,15 @@
                         <input type="text" name="descricao" class="form-control" placeholder="Descrição do produto"
                             value="{{descricao}}">
                     </div>
+                    <div class="mb-3">
+                        <select name="categoria" class="form-select" aria-label="Default select example" value="{{categoria}}">
+                            <option selected>Categoria do produto</option>
+                            <option value="1">Smartphone</option>
+                            <option value="2">AirDot</option>
+                            <option value="3">Smartwhact</option>
+                        </select>
+                    </div>
+
                     <div class="mb-3">
                         <input type="number" name="valor" class="form-control" placeholder="Valor do produto"
                             value="{{valor}}">

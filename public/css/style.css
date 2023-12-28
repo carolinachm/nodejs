@@ -166,3 +166,6 @@ form img{
     height: 150px; /* altura desejada da imagem */
     object-fit: cover; /* para manter a proporção da imagem e cobrir o contêiner */
   }
+  .alert{
+    margin-top: 30px;
+  }
