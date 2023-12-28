@@ -1,8 +1,4 @@
 <main>
-  {{!-- Botão para abrir o modal --}}
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modelProduto">Novo
-    Produto</button>
-
 
   <!-- A Modal -->
   <div class="modal" id="modelProduto">
@@ -11,7 +7,10 @@
 
         <!-- Cabeçalho da Modal -->
         <div class="modal-header">
-          <h4 class="modal-title">Cadastrar Produto</h4>
+
+          <div class="pb-2 mt-4 mb-2 border-bottom">
+            <h4 class="modal-title">Cadastrar Produtos</h4>
+          </div>
           <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
         </div>
 
@@ -21,24 +20,48 @@
           <div class="container">
             <div class="row">
               <div class="col-sm-10 offset-md-1">
-                <form action="/cadastrar" method="post" enctype="multipart/form-data" autocomplete="off">
+                {{!--Mensagens --}}
+                {{#condicionalIgualdade situacao "OkCadastro"}}
+                <div class="alert alert-success">Produto cadastrado com sucesso!</div>
+                {{/condicionalIgualdade}}
+
+                {{#condicionalIgualdade situacao "OkEdicao"}}
+                <div class="alert alert-success">Produto editado com sucesso!</div>
+                {{/condicionalIgualdade}}
+
+                {{#condicionalIgualdade situacao "OkRemover"}}
+                <div class="alert alert-success">Produto removido com sucesso!</div>
+                {{/condicionalIgualdade}}
+
+                {{#condicionalIgualdade situacao "falhaCadastro"}}
+                <div class="alert alert-danger">Falha ao cadastrar o produto, tente novamente.</div>
+                {{/condicionalIgualdade}}
+
+                {{#condicionalIgualdade situacao "falhaEdicao"}}
+                <div class="alert alert-danger">Falha ao editar o produto, tente novamente.</div>
+                {{/condicionalIgualdade}}
+
+                {{#condicionalIgualdade situacao "falhaRemover"}}
+                <div class="alert alert-danger">Falha ao remover o produto, tente novamente.</div>
+                {{/condicionalIgualdade}}
+                
+                <form action="/cadastrar" method="post" enctype="multipart/form-data">
                   <input type="hidden" name="_id" value="{{produto._id}}">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-12">
                     <input type="text" name="nome" class="form-control" placeholder="Nome do produto">
                   </div>
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-12">
                     <input type="text" name="descricao" class="form-control" placeholder="Descrição do produto">
                   </div>
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-12">
                     <input type="number" name="valor" class="form-control" placeholder="Valor do produto">
                   </div>
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-12">
                     <input type="file" name="imagem" class="form-control">
                   </div>
                   <div class="form-group float-right">
-                     <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-database"></i> Salvar</button>
+                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-database"></i>Salvar</button>
                   </div>
-                 
                 </form>
               </div>
             </div>
@@ -55,25 +78,116 @@
     </div>
   </div>
   <!-- Listagem de produtos -->
-<div class="container" mt-4>
-  <h2>Listar de Produtos</h2>
-  <div class="row">
-    {{#each produtos}}
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+  <div class="container">
+    <div class="pb-2 mt-4 mb-2 border-bottom">
+      <h2>Listar Produtos <a class="btn btn-info float-right btn-sm" href="/cadastrar" data-bs-toggle="modal"
+          data-bs-target="#modelProduto"><i class="fas fa-shopping-cart"></i>Cadastrar Novo Produto</a></h2>
+    </div>
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Imagem</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each produtos}}
+          <tr>
+            <td>{{this.imagem}}</td>
+            <td>{{this.nome}}</td>
+            <td>{{this.descricao}}</td>
+            <td>{{this.valor}}</td>
+
+            <td>
+              <a href="/produto/{{this._codigo}}" data-bs-toggle="modal" data-bs-target="#modal{{@index}}"><i
+                  class="fa fa-edit" aria-hidden="true"></i></a>
+              <a href="/remover/{{codigo}}&{{imagem}}" <i class="fa fa-trash" aria-hidden="true"></i></a>
+            </td>
+            {{!-- <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+              data-bs-target="#modal{{@index}}">Alterar</button>
+            <a href="/remover/{{codigo}}&{{imagem}}" class="btn btn-danger btn-sm float-right">Remover</a> --}}
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      {{!-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <div class="card">
-          <img src="/imagens/{{imagem}}">
+          <img src="imagens/{{imagem}}">
           <div class="textos">
             <p>{{nome}}</p>
             <p>{{descricao}}</p>
             <p>R${{valor}}</p>
           </div>
-          <a href="/formularioEditar/{{codigo}}" class="btn btn-warning btn-sm float-right ml-2"> >Alterar</a>
+          {{!-- <a href="/formularioEditar/{{codigo}}" class="btn btn-warning btn-sm float-right ml-2">Alterar</a>
+          --}}
+
+          {{!-- <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+            data-bs-target="#modal{{@index}}">Alterar</button>
           <a href="/remover/{{codigo}}&{{imagem}}" class="btn btn-danger btn-sm float-right">Remover</a>
         </div>
-      </div>
-    {{/each}}
+      </div> --}}
+
+    </div>
+
   </div>
-</div>
 
 
 </main>
+
+{{!-- Gerar uma estrutura de modal para cada linha do vetor --}}
+{{#each produtos}}
+
+{{!-- Modal --}}
+<div class="modal fade" id="modal{{@index}}" tabindex="-1" aria-labelledby="modal{{@index}}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modal{{@index}}">Modal - {{@index}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Formulario -->
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <form action="/editar" method="post" enctype="multipart/form-data">
+                <img src="imagens/{{imagem}}" class="img-fluid">
+                <div class="mb-3">
+                  <input type="hidden" name="nomeImagem" value="{{produto.imagem}}">
+                </div>
+            </div>
+            <input type="hidden" name="codigo" value="{{codigo}}">
+          </div>
+          <div class="mb-3">
+            <input type="text" name="nome" class="form-control" placeholder="Nome do produto" value="{{nome}}">
+          </div>
+          <div class="mb-3">
+            <input type="text" name="descricao" class="form-control" placeholder="Descrição do produto"
+              value="{{descricao}}">
+          </div>
+          <div class="mb-3">
+            <input type="number" name="valor" class="form-control" placeholder="Valor do produto" value="{{valor}}">
+          </div>
+          <div class="mb-3">
+            <input type="file" name="imagem" class="form-control">
+          </div>
+          <input type="submit" class="btn btn-primary" value="Salvar">
+          <a href="/" class="btn btn-secondary">Cancelar</a>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/each}}

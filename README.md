@@ -9,3 +9,5 @@ Treinamento no canal, dessa vez utilizando as tecnologias Node.js e POSTGRESQL. 
    npm install --save-dev nodemon
 # Configurar o banco de dados
     npm install postgres
+
+
