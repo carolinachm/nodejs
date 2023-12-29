@@ -1,4 +1,4 @@
-const produtoQueries = require('../db/produtoQueries')
+const produtoController = require('../controller/produtoController')
 
 //rota para retornar todos os produtos
 app.get('/', (req, res) => {

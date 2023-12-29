@@ -9,7 +9,7 @@ const fileupload = require('express-fileupload')
 const fs = require('fs');
 
 const pool = require('./src/db/configDB').pool
-const db = require('./src/db/produtoQueries')
+const produtoController = require('./src/controller/produtoController')
 
 //App
 const app = express()
@@ -51,11 +51,11 @@ app.use('/imagens', express.static('./imagens'))
 // })
 
 //rota de produtos
-app.get('/produtos', db.buscarTodosProdutos)
-app.get('/produtos/:id', db.buscarProdutosPorId)
-app.post('/produtos', db.cadastrarProdutos)
-app.put('/produtos/:id', db.atualizarProdutos)
-app.delete('/produtos/:id', db.removerProdutos)
+app.get('/produtos', produtoController.buscarTodosProdutos)
+app.get('/produtos/:id', produtoController.buscarProdutosPorId)
+app.post('/produtos', produtoController.cadastrarProdutos)
+app.put('/produtos/:id', produtoController.atualizarProdutos)
+app.delete('/produtos/:id', produtoController.removerProdutos)
 
 //Servidor
 app.listen(PORT, () => {
