@@ -25,7 +25,7 @@ app.use(fileupload())
 app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'));
 
 // Adicionar CSS
-app.use('/css', express.static('./css'));
+app.use('/css', express.static('./public/css'));
 
 // Refereniar a pasta de imagens
 app.use('/imagens', express.static('./imagens'));
@@ -49,7 +49,7 @@ app.get('/', function (req, res) {
 
   // Executar comando SQL
   pool.query(sql, function (erro, retorno) {
-    res.render('formulario', { produtos: retorno });
+    res.render('formulario', { produtos: retorno.rows });
   });
 });
 
@@ -60,9 +60,42 @@ app.get('/:situacao', function (req, res) {
 
   // Executar comando SQL
   pool.query(sql, function (erro, retorno) {
-    res.render('formulario', { produtos: retorno, situacao: req.params.situacao });
+    res.render('formulario', { produtos: retorno.rows, situacao: req.params.situacao });
   });
 });
+//Rota de listagem
+app.get('/listar/:categoria', function (req, res){
+  //obter categoria
+  let categoria = req.params.categoria;
+
+  //sql
+  let sql = '';
+
+  if(categoria == 'todos'){
+    sql = `SELECT * FROM produtos`;
+  }else{
+    sql = `SELECT * FROM produtos WHERE categoria = '${categoria}'`;
+  }
+  //Executar comando sql
+  pool.query(sql, function(erro, retorno){
+    res.render('listar', {produtos: retorno.rows})
+  })
+})
+
+//Rota de pesquisa
+app.post('/pesquisa', function (req, res) {
+  //Obter o termo pesquisado
+  let termo = req.body.termo;
+  //SQL
+  let sql = `SELECT * FROM produtos WHERE nome LIKE '%${termo}%'`;
+  //Executar o comando sql
+  pool.query(sql, function (erro, retorno) {
+    res.render('listar', { produtos: retorno.rows});
+  });
+
+  
+
+})
 
 // Rota de cadastro
 app.post('/cadastrar', function (req, res) {
@@ -75,11 +108,11 @@ app.post('/cadastrar', function (req, res) {
     let imagem = req.files.imagem.name;
 
     // Validar o nome do produto e o valor
-    if (nome == '' || valor == '' || isNaN(valor) || categoria == '') {
+    if (nome == '' || descricao == '' || valor == '' || isNaN(valor) || categoria == '') {
       res.redirect('/falhaCadastro');
     } else {
       // SQL
-      let sql = `INSERT INTO produtos (nome,descricao, valor, imagem, categoria) VALUES ('${nome}','${descricao}', ${valor}, '${imagem}', '${categoria}')`;
+      let sql = `INSERT INTO produtos (nome,descricao,valor,imagem,categoria) VALUES ('${nome}','${descricao}', ${valor}, '${imagem}', '${categoria}')`;
 
       // Executar comando SQL
       pool.query(sql, function (erro, retorno) {
@@ -87,7 +120,7 @@ app.post('/cadastrar', function (req, res) {
         if (erro) throw erro;
 
         // Caso ocorra o cadastro
-        req.files.imagem.mv(__dirname + '/imagens/' + req.files.imagem.nome);
+        req.files.imagem.mv(__dirname + '/imagens/' + req.files.imagem.name);
         console.log(retorno);
       });
 
@@ -138,7 +171,7 @@ app.get('/formularioEditar/:codigo', function (req, res) {
     if (erro) throw erro;
 
     // Caso consiga executar o comando SQL
-    res.render('formularioEditar', { produto: retorno[0] });
+    res.render('formularioEditar', { produto: retorno[0].rows});
   });
 
 });

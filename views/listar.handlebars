@@ -1,76 +1,7 @@
 <main>
-
-  <!-- A Modal -->
-  <div class="modal" id="modelProduto">
-    <div class="modal-dialog">
-      <div class="modal-content">
-
-        <!-- Cabeçalho da Modal -->
-        <div class="modal-header">
-
-          <div class="pb-2 mt-4 mb-2 border-bottom">
-            <h4 class="modal-title">Cadastrar Produtos</h4>
-          </div>
-          <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-        </div>
-
-        <!-- Corpo da Modal -->
-        <div class="modal-body">
-          {{!-- Formulario --}}
-          <div class="container">
-             
-            <div class="row">
-              <div class="col-sm-10 offset-md-1">
-               
-                <form action="/cadastrar" method="post" enctype="multipart/form-data">
-                  <input type="hidden" name="_id" value="{{produto._id}}">
-                  <div class="form-group col-md-12">
-                    <input type="text" name="nome" class="form-control" placeholder="Nome do produto">
-                  </div>
-                  <div class="form-group col-md-12">
-                    <input type="text" name="descricao" class="form-control" placeholder="Descrição do produto">
-                  </div>
-                  <div class="form-group col-md-12">
-                    <input type="number" name="valor" class="form-control" placeholder="Valor do produto">
-                  </div>
-                  <div class="form-group col-md-12">
-                    <select name="categoria" class="form-select" aria-label="Default select example">
-                      <option selected>Categoria do produto</option>
-                      <option value="Smartphone">Smartphone</option>
-                      <option value="AirDot">AirDot</option>
-                      <option value="Smartwhact">Smartwhact</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group col-md-12">
-                    <input type="file" name="imagem" class="form-control">
-                  </div>
-                  <div class="form-group float-right">
-                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-database"></i>Salvar</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Rodapé da Modal -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <!-- Adicione outros botões ou ações conforme necessário -->
-        </div>
-
-      </div>
-    </div>
-  </div>
   <!-- Listagem de produtos -->
   <div class="container">
-    {{!--Mensagens --}}
-    {{>mensagens}}
-    <div class="pb-2 mt-4 mb-2 border-bottom">
-      <h2>Listar Produtos <a class="btn btn-info float-right btn-sm" href="/cadastrar" data-bs-toggle="modal"
-          data-bs-target="#modelProduto"><i class="fas fa-shopping-cart"></i>Cadastrar Novo Produto</a></h2>
-    </div>
+  
     <div class="row">
       <table class="table tabela-imagem">
         <thead class="thead-dark">
@@ -86,7 +17,7 @@
         <tbody>
           {{#each produtos}}
           <tr>
-            <td><img src='imagens/{{this.imagem}}'class="imagem-reduzida" alt="Imagem"></td>
+            <td><img src='../imagens/{{this.imagem}}'class="imagem-reduzida" alt="Imagem"></td>
             <td>{{nome}}</td>
             <td>{{descricao}}</td>
             <td>{{categoria}}</td>
@@ -145,9 +76,9 @@
            <div class="mb-3">
              <select name="categoria" class="form-select" aria-label="Default select example" value="{{categoria}}">
                       <option selected>Categoria do produtos</option>
-                      <option value="1">Smartphone</option>
-                      <option value="2">AirDot</option>
-                      <option value="3">Smartwhact</option>
+                      <option value="Smartphone">Smartphone</option>
+                      <option value="AirDot">AirDot</option>
+                      <option value="Smartwhact">Smartwhact</option>
                     </select>
           </div>
           <div class="mb-3">
