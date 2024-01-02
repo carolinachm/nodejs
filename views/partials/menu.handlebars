@@ -11,9 +11,19 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cadastrar">Produtos</a>
-                </li>
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Cadastros
+                    </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                         <li><a class="dropdown-item" href="#">Todos Cadastros</a></li>
+                        <li><a class="dropdown-item" href="/usuarios">Usuários</a></li>
+                        <li><a class="dropdown-item" href="/clientes">Clientes</a></li> 
+                         <li><a class="dropdown-item" href="/cadastrar">Produtos</a></li> 
+                         <li><a class="dropdown-item" href="/pedidos">Pedidos</a></li>
+                    </ul>
+                      </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -28,9 +38,10 @@
                 </li>
 
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Pesquisa" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Pesquisa</button>
+            {{!--Formulário para realizar a pesquisa de produtos--}}
+            <form class="d-flex formularioPesquisa" method="post" action="/pesquisa">
+                <input class="form-control me-2" name="termo" type="search" placeholder="Pesquisar" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit" value="Pesquisar">Pesquisar</button>
             </form>
         </div>
     </div>

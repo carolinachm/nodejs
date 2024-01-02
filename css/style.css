@@ -24,7 +24,7 @@ body {
   
   header.masthead .overlay {
     position: absolute;
-    background-color: #212529;
+    background-color: #000203;
     height: 100%;
     width: 100%;
     top: 0;
@@ -32,7 +32,7 @@ body {
     opacity: 0.3;
   }
   .header-bg-dark{
-      background-color: #273E4A!important;
+      background-color: #000203!important;
   }
   .showcase .container {
     min-height: 350px;
@@ -73,7 +73,7 @@ body {
     padding-bottom: 1rem;
   }
   .footer-bg-dark {
-      background-color: #263E4A!important;
+      background-color: #000203!important;
   }
   .list-inline {
    list-style-type: none;
@@ -131,27 +131,32 @@ body {
   #event-calendar table tr td {
       height: 90px;
   }
-  
-form{
+  form{
     margin-top: 30px;
+    text-align: center;
 }
-form input{
+
+form input, form select{
+    margin-bottom: 10px;
+}
+
+form input[type="submit"]{
     margin-top: 10px;
 }
-form input[type="submit"]{
-    margin-top:10px;
-}
+
 form img{
     width: 200px;
     margin-bottom: 40px;
 }
+
 .card{
     margin-top: 40px;
     padding: 5px;
 }
+
 .textos{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 30px;
     font-weight: bold;
 }
@@ -159,19 +164,14 @@ form img{
 .card a{
     margin-top: 5px;
 }
-.card img {
-    width: 100%; /* a imagem ocupará 100% da largura do contêiner pai (.card) */
-    height: 150px; /* altura desejada da imagem */
-    object-fit: cover; /* para manter a proporção da imagem e cobrir o contêiner */
-  }
-  .alert{
+
+.alert{
     margin-top: 30px;
-  }
-  /* Remover margem do formulário */
+}
+
 .formularioPesquisa{
     margin: 0;
 }
-
 /* Estrutura do formulário de pesquisa (barra de navegação) */
 .formularioPesquisa input,
 .formularioPesquisa input[type="submit"]
@@ -192,4 +192,8 @@ form img{
   max-width: 50px; /* Ajuste o valor conforme necessário */
   height: auto;
   width: 50px;
+}
+.produtoNaoEncontrado{
+  text-align: center;
+  margin-top: 50px;
 }

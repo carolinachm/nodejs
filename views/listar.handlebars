@@ -1,6 +1,13 @@
 <main>
+  {{!--Exibir mensagem, se necessario--}}
+  {{#if semRegistros}}
+  <h1 class="produtoNaoEncontrado">Nenhum produto encontrado :(</h1>
+  {{/if}}
   <!-- Listagem de produtos -->
   <div class="container">
+     <div class="pb-2 mt-4 mb-2 border-bottom">
+      <h2>Listar Produtos </h2>
+    </div>
   
     <div class="row">
       <table class="table tabela-imagem">
