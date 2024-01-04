@@ -48,13 +48,13 @@ function listagemProdutos(req, res){
   let sql = '';
 
   if(categoria == 'todos'){
-    sql = `SELECT * FROM produtos ORDER BY RAND()`;
+    sql = `SELECT * FROM produtos ORDER BY RANDOM()`;
   }else{
     sql = `SELECT * FROM produtos WHERE categoria = '${categoria}' ORDER BY nome ASC`;
   }
   //Executar comando sql
   pool.query(sql, function(erro, retorno){
-    res.render('listar', {produtos: retorno})
+    res.render('listar', {produtos: retorno.rows})
   })
 }
 
